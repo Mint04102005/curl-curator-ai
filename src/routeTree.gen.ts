@@ -9,38 +9,155 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UserRouteImport } from './routes/_user'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRegisterRouteImport } from './routes/auth.register'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as UserTryOnRouteImport } from './routes/_user.try-on'
+import { Route as UserSalonsRouteImport } from './routes/_user.salons'
+import { Route as UserRecommendationRouteImport } from './routes/_user.recommendation'
+import { Route as UserProfileRouteImport } from './routes/_user.profile'
+import { Route as UserHomeRouteImport } from './routes/_user.home'
+import { Route as UserBookingIdRouteImport } from './routes/_user.booking.$id'
 
+const UserRoute = UserRouteImport.update({
+  id: '/_user',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserTryOnRoute = UserTryOnRouteImport.update({
+  id: '/try-on',
+  path: '/try-on',
+  getParentRoute: () => UserRoute,
+} as any)
+const UserSalonsRoute = UserSalonsRouteImport.update({
+  id: '/salons',
+  path: '/salons',
+  getParentRoute: () => UserRoute,
+} as any)
+const UserRecommendationRoute = UserRecommendationRouteImport.update({
+  id: '/recommendation',
+  path: '/recommendation',
+  getParentRoute: () => UserRoute,
+} as any)
+const UserProfileRoute = UserProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => UserRoute,
+} as any)
+const UserHomeRoute = UserHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => UserRoute,
+} as any)
+const UserBookingIdRoute = UserBookingIdRouteImport.update({
+  id: '/booking/$id',
+  path: '/booking/$id',
+  getParentRoute: () => UserRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/home': typeof UserHomeRoute
+  '/profile': typeof UserProfileRoute
+  '/recommendation': typeof UserRecommendationRoute
+  '/salons': typeof UserSalonsRoute
+  '/try-on': typeof UserTryOnRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/booking/$id': typeof UserBookingIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/home': typeof UserHomeRoute
+  '/profile': typeof UserProfileRoute
+  '/recommendation': typeof UserRecommendationRoute
+  '/salons': typeof UserSalonsRoute
+  '/try-on': typeof UserTryOnRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/booking/$id': typeof UserBookingIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_user': typeof UserRouteWithChildren
+  '/_user/home': typeof UserHomeRoute
+  '/_user/profile': typeof UserProfileRoute
+  '/_user/recommendation': typeof UserRecommendationRoute
+  '/_user/salons': typeof UserSalonsRoute
+  '/_user/try-on': typeof UserTryOnRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/register': typeof AuthRegisterRoute
+  '/_user/booking/$id': typeof UserBookingIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/home'
+    | '/profile'
+    | '/recommendation'
+    | '/salons'
+    | '/try-on'
+    | '/auth/login'
+    | '/auth/register'
+    | '/booking/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/home'
+    | '/profile'
+    | '/recommendation'
+    | '/salons'
+    | '/try-on'
+    | '/auth/login'
+    | '/auth/register'
+    | '/booking/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/_user'
+    | '/_user/home'
+    | '/_user/profile'
+    | '/_user/recommendation'
+    | '/_user/salons'
+    | '/_user/try-on'
+    | '/auth/login'
+    | '/auth/register'
+    | '/_user/booking/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UserRoute: typeof UserRouteWithChildren
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_user': {
+      id: '/_user'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof UserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +165,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_user/try-on': {
+      id: '/_user/try-on'
+      path: '/try-on'
+      fullPath: '/try-on'
+      preLoaderRoute: typeof UserTryOnRouteImport
+      parentRoute: typeof UserRoute
+    }
+    '/_user/salons': {
+      id: '/_user/salons'
+      path: '/salons'
+      fullPath: '/salons'
+      preLoaderRoute: typeof UserSalonsRouteImport
+      parentRoute: typeof UserRoute
+    }
+    '/_user/recommendation': {
+      id: '/_user/recommendation'
+      path: '/recommendation'
+      fullPath: '/recommendation'
+      preLoaderRoute: typeof UserRecommendationRouteImport
+      parentRoute: typeof UserRoute
+    }
+    '/_user/profile': {
+      id: '/_user/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof UserProfileRouteImport
+      parentRoute: typeof UserRoute
+    }
+    '/_user/home': {
+      id: '/_user/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof UserHomeRouteImport
+      parentRoute: typeof UserRoute
+    }
+    '/_user/booking/$id': {
+      id: '/_user/booking/$id'
+      path: '/booking/$id'
+      fullPath: '/booking/$id'
+      preLoaderRoute: typeof UserBookingIdRouteImport
+      parentRoute: typeof UserRoute
+    }
   }
 }
 
+interface UserRouteChildren {
+  UserHomeRoute: typeof UserHomeRoute
+  UserProfileRoute: typeof UserProfileRoute
+  UserRecommendationRoute: typeof UserRecommendationRoute
+  UserSalonsRoute: typeof UserSalonsRoute
+  UserTryOnRoute: typeof UserTryOnRoute
+  UserBookingIdRoute: typeof UserBookingIdRoute
+}
+
+const UserRouteChildren: UserRouteChildren = {
+  UserHomeRoute: UserHomeRoute,
+  UserProfileRoute: UserProfileRoute,
+  UserRecommendationRoute: UserRecommendationRoute,
+  UserSalonsRoute: UserSalonsRoute,
+  UserTryOnRoute: UserTryOnRoute,
+  UserBookingIdRoute: UserBookingIdRoute,
+}
+
+const UserRouteWithChildren = UserRoute._addFileChildren(UserRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UserRoute: UserRouteWithChildren,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
