@@ -15,8 +15,8 @@ import { bookingService } from "@/services/booking.service";
 import { salonService } from "@/services/salon.service";
 import { useAuthStore } from "@/stores/auth.store";
 
-export const Route = createFileRoute("/_user/booking/$id")({
-  head: () => ({ meta: [{ title: "Đặt lịch — HairSense" }] }),
+export const Route = createFileRoute("/user/booking/$id")({
+  head: () => ({ meta: [{ title: "Đặt lịch — AI Hairstyle Recommendation System" }] }),
   component: BookingPage,
 });
 
@@ -57,7 +57,7 @@ function BookingPage() {
       }),
     onSuccess: () => {
       toast.success("Đặt lịch thành công! Đang chờ salon xác nhận.");
-      navigate({ to: "/profile" });
+      navigate({ to: "/user/profile" });
     },
     onError: (e) => toast.error(e instanceof Error ? e.message : "Đặt lịch thất bại"),
   });
@@ -69,7 +69,7 @@ function BookingPage() {
         <ErrorState title="Không tìm thấy salon" />
         <div className="mt-4 text-center">
           <Button asChild variant="outline">
-            <Link to="/salons">Quay lại danh sách</Link>
+            <Link to="/user/salons">Quay lại danh sách</Link>
           </Button>
         </div>
       </div>
@@ -80,7 +80,7 @@ function BookingPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       <Button asChild variant="ghost" size="sm" className="mb-4">
-        <Link to="/salons">
+        <Link to="/user/salons">
           <ArrowLeft className="mr-1.5 h-4 w-4" /> Quay lại
         </Link>
       </Button>
@@ -124,14 +124,18 @@ function BookingPage() {
               <Label htmlFor="date">Ngày</Label>
               <Input id="date" type="date" className="mt-1.5" {...form.register("date")} />
               {form.formState.errors.date ? (
-                <p className="mt-1 text-xs text-destructive">{form.formState.errors.date.message}</p>
+                <p className="mt-1 text-xs text-destructive">
+                  {form.formState.errors.date.message}
+                </p>
               ) : null}
             </div>
             <div>
               <Label htmlFor="time">Giờ</Label>
               <Input id="time" type="time" className="mt-1.5" {...form.register("time")} />
               {form.formState.errors.time ? (
-                <p className="mt-1 text-xs text-destructive">{form.formState.errors.time.message}</p>
+                <p className="mt-1 text-xs text-destructive">
+                  {form.formState.errors.time.message}
+                </p>
               ) : null}
             </div>
           </div>

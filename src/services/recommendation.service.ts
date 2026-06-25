@@ -23,8 +23,10 @@ export const recommendationService = {
     if (!input.imageDataUrl) throw new Error("Vui lòng cung cấp ảnh khuôn mặt");
 
     // Deterministic-ish mock from description hash
-    const hash = Array.from(input.description + input.imageDataUrl.slice(-40))
-      .reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    const hash = Array.from(input.description + input.imageDataUrl.slice(-40)).reduce(
+      (acc, ch) => acc + ch.charCodeAt(0),
+      0,
+    );
     const shape = MOCK_FACE_SHAPES[hash % MOCK_FACE_SHAPES.length]!.shape_name;
     const confidence = 82 + (hash % 16);
 
@@ -32,9 +34,7 @@ export const recommendationService = {
 
     const recommendations = MOCK_HAIRSTYLES.filter((h) => h.gender === input.gender)
       .map((h) => {
-        const rule = MOCK_HAIR_FACE.find(
-          (r) => r.hair_id === h.hair_id && r.shape_id === shapeId,
-        );
+        const rule = MOCK_HAIR_FACE.find((r) => r.hair_id === h.hair_id && r.shape_id === shapeId);
         return { hairstyle: h, score: rule?.suitability_score ?? 50 };
       })
       .sort((a, b) => b.score - a.score)

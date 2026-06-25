@@ -20,7 +20,7 @@ export const useAuthStore = create<AuthState>()(
       setHydrated: (v) => set({ hydrated: v }),
     }),
     {
-      name: "hairsense-auth",
+      name: "ai-hairstyle-auth",
       storage: createJSONStorage(() =>
         typeof window !== "undefined"
           ? window.localStorage

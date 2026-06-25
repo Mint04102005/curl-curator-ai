@@ -4,14 +4,22 @@ import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/stores/auth.store";
 
 export const Route = createFileRoute("/salon/bookings")({
-  head: () => ({ meta: [{ title: "Salon Dashboard — HairSense" }] }),
+  head: () => ({ meta: [{ title: "Salon Dashboard — AI Hairstyle Recommendation System" }] }),
   component: SalonStub,
 });
 
 function SalonStub() {
   const logout = useAuthStore((s) => s.logout);
   const navigate = useNavigate();
-  return <UnderConstruction title="Salon Dashboard" onLogout={() => { logout(); navigate({ to: "/auth/login" }); }} />;
+  return (
+    <UnderConstruction
+      title="Salon Dashboard"
+      onLogout={() => {
+        logout();
+        navigate({ to: "/auth/login" });
+      }}
+    />
+  );
 }
 
 function UnderConstruction({ title, onLogout }: { title: string; onLogout: () => void }) {

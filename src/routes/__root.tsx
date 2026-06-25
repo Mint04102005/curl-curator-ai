@@ -7,11 +7,10 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -38,9 +37,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -78,18 +74,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Style Scout is an AI-powered app that recommends hairstyles, allows virtual try-ons, and connects users with salons." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Style Scout is an AI-powered app that recommends hairstyles, allows virtual try-ons, and connects users with salons." },
+      { title: "AI Hairstyle Recommendation System" },
+      {
+        name: "description",
+        content:
+          "AI Hairstyle Recommendation System is an AI-powered app that recommends hairstyles, allows virtual try-ons, and connects users with salons.",
+      },
+      { name: "author", content: "AI Hairstyle Recommendation System" },
+      { property: "og:title", content: "AI Hairstyle Recommendation System" },
+      {
+        property: "og:description",
+        content:
+          "AI Hairstyle Recommendation System is an AI-powered app that recommends hairstyles, allows virtual try-ons, and connects users with salons.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Style Scout is an AI-powered app that recommends hairstyles, allows virtual try-ons, and connects users with salons." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9b6add5e-4748-4c76-813b-6f571a97b069/id-preview-54684ddb--54ddef67-d27b-4912-ab01-889e450b0e23.lovable.app-1782422071825.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9b6add5e-4748-4c76-813b-6f571a97b069/id-preview-54684ddb--54ddef67-d27b-4912-ab01-889e450b0e23.lovable.app-1782422071825.png" },
+      { name: "twitter:title", content: "AI Hairstyle Recommendation System" },
+      {
+        name: "twitter:description",
+        content:
+          "AI Hairstyle Recommendation System is an AI-powered app that recommends hairstyles, allows virtual try-ons, and connects users with salons.",
+      },
     ],
     links: [
       {

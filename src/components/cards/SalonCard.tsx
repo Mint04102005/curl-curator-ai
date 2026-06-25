@@ -37,7 +37,7 @@ export function SalonCard({ salon }: { salon: Salon }) {
           ))}
         </div>
         <Button asChild size="sm" className="w-full">
-          <Link to="/booking/$id" params={{ id: String(salon.salon_id) }}>
+          <Link to="/user/booking/$id" params={{ id: String(salon.salon_id) }}>
             <CalendarPlus className="mr-1.5 h-3.5 w-3.5" />
             Đặt lịch
           </Link>

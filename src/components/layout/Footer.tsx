@@ -5,10 +5,10 @@ export function Footer() {
     <footer className="mt-16 border-t border-border bg-card/50">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="space-y-3">
-          <Logo to="/home" />
+          <Logo to="/user/home" />
           <p className="max-w-xs text-sm text-muted-foreground">
-            Nền tảng tư vấn kiểu tóc bằng AI — phân tích khuôn mặt, thử tóc ảo và đặt lịch salon
-            chỉ trong vài giây.
+            Nền tảng tư vấn kiểu tóc bằng AI — phân tích khuôn mặt, thử tóc ảo và đặt lịch salon chỉ
+            trong vài giây.
           </p>
         </div>
         <FooterCol
@@ -30,7 +30,7 @@ export function Footer() {
         <FooterCol
           title="Liên hệ"
           items={[
-            { label: "hello@hairsense.app" },
+            { label: "hello@ai-hairstyle-recommendation.app" },
             { label: "+84 28 1234 5678" },
             { label: "TP. Hồ Chí Minh" },
           ]}
@@ -38,7 +38,8 @@ export function Footer() {
       </div>
       <div className="border-t border-border">
         <p className="mx-auto max-w-7xl px-4 py-4 text-center text-xs text-muted-foreground sm:px-6 lg:px-8">
-          © {new Date().getFullYear()} HairSense AI Studio. All rights reserved.
+          © {new Date().getFullYear()} AI Hairstyle Recommendation System Studio. All rights
+          reserved.
         </p>
       </div>
     </footer>

@@ -16,6 +16,9 @@ export interface User {
   created_at: string;
   is_locked?: boolean;
   avatar_url?: string;
+  fullname?: string;
+  dob?: string;
+  address?: string;
 }
 
 export interface SalonOwner {

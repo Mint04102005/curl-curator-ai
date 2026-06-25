@@ -21,9 +21,9 @@ import { recommendationService } from "@/services/recommendation.service";
 import { useAuthStore } from "@/stores/auth.store";
 import type { Gender, RecommendationResult } from "@/types";
 
-export const Route = createFileRoute("/_user/recommendation")({
+export const Route = createFileRoute("/user/recommendation")({
   head: () => ({
-    meta: [{ title: "AI Recommendation — HairSense" }],
+    meta: [{ title: "AI Recommendation — AI Hairstyle Recommendation System" }],
   }),
   component: RecommendationPage,
 });
@@ -103,7 +103,11 @@ function RecommendationPage() {
               <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()}>
                 <Upload className="mr-1.5 h-3.5 w-3.5" /> Upload ảnh
               </Button>
-              <Button size="sm" variant="outline" onClick={() => toast.info("Tính năng chụp ảnh sẽ kích hoạt camera thiết bị")}>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => toast.info("Tính năng chụp ảnh sẽ kích hoạt camera thiết bị")}
+              >
                 <Camera className="mr-1.5 h-3.5 w-3.5" /> Chụp ảnh
               </Button>
             </div>
@@ -154,7 +158,7 @@ function RecommendationPage() {
           ) : result ? (
             <ResultView
               result={result}
-              onTry={(hair_id) => navigate({ to: "/try-on", search: { hair_id } })}
+              onTry={(hair_id) => navigate({ to: "/user/try-on", search: { hair_id } })}
             />
           ) : (
             <div className="flex h-full min-h-[400px] flex-col items-center justify-center text-center text-muted-foreground">

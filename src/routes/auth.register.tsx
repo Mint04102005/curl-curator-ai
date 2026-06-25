@@ -24,7 +24,7 @@ import { useAuthStore } from "@/stores/auth.store";
 import type { Gender } from "@/types";
 
 export const Route = createFileRoute("/auth/register")({
-  head: () => ({ meta: [{ title: "Đăng ký — HairSense" }] }),
+  head: () => ({ meta: [{ title: "Đăng ký — AI Hairstyle Recommendation System" }] }),
   component: RegisterPage,
 });
 
@@ -57,7 +57,7 @@ function RegisterPage() {
           <Logo />
           <h2 className="mt-6 text-2xl font-semibold tracking-tight">Tạo tài khoản</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Chọn loại tài khoản phù hợp để bắt đầu trải nghiệm HairSense.
+            Chọn loại tài khoản phù hợp để bắt đầu trải nghiệm AI Hairstyle Recommendation System.
           </p>
 
           <Tabs defaultValue="user" className="mt-6">
@@ -85,13 +85,7 @@ function RegisterPage() {
   );
 }
 
-function GenderSelect({
-  value,
-  onChange,
-}: {
-  value: Gender;
-  onChange: (v: Gender) => void;
-}) {
+function GenderSelect({ value, onChange }: { value: Gender; onChange: (v: Gender) => void }) {
   return (
     <Select value={value} onValueChange={(v) => onChange(v as Gender)}>
       <SelectTrigger>
@@ -146,10 +140,7 @@ function UserForm() {
         <Input {...form.register("phone")} />
       </Field>
       <Field label="Giới tính">
-        <GenderSelect
-          value={form.watch("gender")}
-          onChange={(v) => form.setValue("gender", v)}
-        />
+        <GenderSelect value={form.watch("gender")} onChange={(v) => form.setValue("gender", v)} />
       </Field>
       <div className="sm:col-span-2">
         <Field label="Mật khẩu" error={form.formState.errors.password?.message}>
@@ -208,10 +199,7 @@ function SalonForm() {
         <Input {...form.register("phone")} />
       </Field>
       <Field label="Giới tính">
-        <GenderSelect
-          value={form.watch("gender")}
-          onChange={(v) => form.setValue("gender", v)}
-        />
+        <GenderSelect value={form.watch("gender")} onChange={(v) => form.setValue("gender", v)} />
       </Field>
       <Field label="Tên salon" error={form.formState.errors.salonname?.message}>
         <Input {...form.register("salonname")} />

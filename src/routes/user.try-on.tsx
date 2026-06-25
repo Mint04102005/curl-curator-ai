@@ -22,9 +22,9 @@ const searchSchema = z.object({
   hair_id: z.coerce.number().optional(),
 });
 
-export const Route = createFileRoute("/_user/try-on")({
+export const Route = createFileRoute("/user/try-on")({
   validateSearch: searchSchema,
-  head: () => ({ meta: [{ title: "Thử tóc ảo — HairSense" }] }),
+  head: () => ({ meta: [{ title: "Thử tóc ảo — AI Hairstyle Recommendation System" }] }),
   component: TryOnPage,
 });
 
@@ -91,7 +91,7 @@ function TryOnPage() {
     if (!output) return;
     const a = document.createElement("a");
     a.href = output;
-    a.download = `hairsense-${Date.now()}.png`;
+    a.download = `ai-hairstyle-${Date.now()}.png`;
     a.click();
   };
 

@@ -7,8 +7,8 @@ import { CardSkeletonGrid, EmptyState, ErrorState } from "@/components/shared/St
 import { Input } from "@/components/ui/input";
 import { salonService } from "@/services/salon.service";
 
-export const Route = createFileRoute("/_user/salons")({
-  head: () => ({ meta: [{ title: "Tìm salon — HairSense" }] }),
+export const Route = createFileRoute("/user/salons")({
+  head: () => ({ meta: [{ title: "Tìm salon — AI Hairstyle Recommendation System" }] }),
   component: SalonsPage,
 });
 

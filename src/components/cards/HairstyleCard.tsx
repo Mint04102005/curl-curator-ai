@@ -42,9 +42,7 @@ export function HairstyleCard({ hair, score }: Props) {
         <p className="line-clamp-2 text-xs text-muted-foreground">{hair.description}</p>
         <Button
           size="sm"
-          onClick={() =>
-            navigate({ to: "/try-on", search: { hair_id: hair.hair_id } })
-          }
+          onClick={() => navigate({ to: "/user/try-on", search: { hair_id: hair.hair_id } })}
         >
           <Wand2 className="mr-1.5 h-3.5 w-3.5" />
           Thử ngay

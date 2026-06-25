@@ -16,7 +16,7 @@ import { useAuthStore } from "@/stores/auth.store";
 
 export const Route = createFileRoute("/auth/login")({
   head: () => ({
-    meta: [{ title: "Đăng nhập — HairSense" }],
+    meta: [{ title: "Đăng nhập — AI Hairstyle Recommendation System" }],
   }),
   component: LoginPage,
 });

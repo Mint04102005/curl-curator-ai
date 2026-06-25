@@ -10,10 +10,10 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { hairstyleService } from "@/services/hairstyle.service";
 import type { Gender } from "@/types";
 
-export const Route = createFileRoute("/_user/home")({
+export const Route = createFileRoute("/user/home")({
   head: () => ({
     meta: [
-      { title: "HairSense — Trang chủ" },
+      { title: "AI Hairstyle Recommendation System — Trang chủ" },
       {
         name: "description",
         content: "Khám phá kiểu tóc nổi bật và thử ngay bằng AI.",
@@ -90,18 +90,18 @@ function Hero() {
             <span className="text-primary">tự tin hơn mỗi ngày.</span>
           </h1>
           <p className="mt-4 max-w-xl text-base text-muted-foreground">
-            Tải ảnh khuôn mặt, để AI gợi ý kiểu tóc phù hợp nhất với bạn — rồi thử ngay và đặt
-            lịch tại salon yêu thích.
+            Tải ảnh khuôn mặt, để AI gợi ý kiểu tóc phù hợp nhất với bạn — rồi thử ngay và đặt lịch
+            tại salon yêu thích.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg">
-              <Link to="/recommendation">
+              <Link to="/user/recommendation">
                 <Sparkles className="mr-2 h-4 w-4" />
                 Thử tóc bằng AI
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/salons">
+              <Link to="/user/salons">
                 <MapPin className="mr-2 h-4 w-4" />
                 Tìm salon
               </Link>
@@ -142,19 +142,19 @@ function FeatureBand() {
       icon: Camera,
       title: "Phân tích khuôn mặt",
       desc: "AI nhận diện dáng mặt và đề xuất kiểu tóc phù hợp.",
-      to: "/recommendation" as const,
+      to: "/user/recommendation" as const,
     },
     {
       icon: Sparkles,
       title: "Thử tóc ảo",
       desc: "Ghép kiểu tóc lên ảnh của bạn ngay trong vài giây.",
-      to: "/try-on" as const,
+      to: "/user/try-on" as const,
     },
     {
       icon: MapPin,
       title: "Đặt lịch salon",
       desc: "Tìm salon phù hợp và đặt lịch chỉ với 1 chạm.",
-      to: "/salons" as const,
+      to: "/user/salons" as const,
     },
   ];
   return (
@@ -172,7 +172,8 @@ function FeatureBand() {
             <h3 className="mt-4 text-lg font-semibold">{it.title}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{it.desc}</p>
             <span className="mt-4 inline-flex items-center text-sm font-medium text-primary">
-              Khám phá <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              Khám phá{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </Link>
         ))}

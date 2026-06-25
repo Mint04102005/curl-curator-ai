@@ -27,9 +27,7 @@ export const authService = {
   async login({ username, password }: LoginPayload): Promise<User> {
     await randomDelay();
     if (!password) throw new Error("Mật khẩu không được trống");
-    const user = runtimeUsers.find(
-      (u) => u.username.toLowerCase() === username.toLowerCase(),
-    );
+    const user = runtimeUsers.find((u) => u.username.toLowerCase() === username.toLowerCase());
     if (!user) throw new Error("Tài khoản không tồn tại");
     if (user.is_locked) throw new Error("Tài khoản đã bị khóa");
     return user;

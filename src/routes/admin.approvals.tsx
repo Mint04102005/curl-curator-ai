@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/stores/auth.store";
 
 export const Route = createFileRoute("/admin/approvals")({
-  head: () => ({ meta: [{ title: "Admin Dashboard — HairSense" }] }),
+  head: () => ({ meta: [{ title: "Admin Dashboard — AI Hairstyle Recommendation System" }] }),
   component: AdminStub,
 });
 
@@ -22,10 +22,21 @@ function AdminStub() {
           Module này thuộc Phase 3. Sẽ được triển khai sau khi User Module hoàn tất.
         </p>
         <div className="mt-5 flex justify-center gap-2">
-          <Button asChild variant="outline" size="sm" className="border-slate-700 bg-slate-800 text-slate-100 hover:bg-slate-700">
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="border-slate-700 bg-slate-800 text-slate-100 hover:bg-slate-700"
+          >
             <Link to="/auth/login">Về trang đăng nhập</Link>
           </Button>
-          <Button size="sm" onClick={() => { logout(); navigate({ to: "/auth/login" }); }}>
+          <Button
+            size="sm"
+            onClick={() => {
+              logout();
+              navigate({ to: "/auth/login" });
+            }}
+          >
             <LogOut className="mr-1.5 h-3.5 w-3.5" /> Đăng xuất
           </Button>
         </div>

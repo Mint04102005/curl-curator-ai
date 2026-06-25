@@ -15,10 +15,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuthStore } from "@/stores/auth.store";
 
 const NAV = [
-  { to: "/home", label: "Trang chủ" },
-  { to: "/recommendation", label: "AI Gợi ý" },
-  { to: "/try-on", label: "Thử tóc" },
-  { to: "/salons", label: "Salon" },
+  { to: "/user/home", label: "Trang chủ" },
+  { to: "/user/recommendation", label: "AI Gợi ý" },
+  { to: "/user/try-on", label: "Thử tóc" },
+  { to: "/user/salons", label: "Salon" },
 ] as const;
 
 export function Navbar() {
@@ -36,7 +36,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Logo to="/home" />
+        <Logo to="/user/home" />
 
         <nav className="hidden items-center gap-1 md:flex">
           {NAV.map((item) => {
@@ -72,7 +72,7 @@ export function Navbar() {
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate({ to: "/profile" })}>
+                <DropdownMenuItem onClick={() => navigate({ to: "/user/profile" })}>
                   <UserIcon className="mr-2 h-4 w-4" /> Hồ sơ của tôi
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />

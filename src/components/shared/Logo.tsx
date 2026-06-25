@@ -8,7 +8,9 @@ export function Logo({ to = "/" }: { to?: string }) {
         <Scissors className="h-4 w-4" />
       </div>
       <div className="flex flex-col leading-tight">
-        <span className="text-base font-semibold tracking-tight text-foreground">HairSense</span>
+        <span className="text-base font-semibold tracking-tight text-foreground">
+          AI Hairstyle Recommendation System
+        </span>
         <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
           AI Studio
         </span>

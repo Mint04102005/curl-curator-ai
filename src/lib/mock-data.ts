@@ -17,19 +17,21 @@ const HAIR_IMG = (seed: string) =>
 const SALON_IMG = (seed: string) =>
   `https://images.unsplash.com/${seed}?w=800&h=600&fit=crop&auto=format`;
 
-const AVATAR = (seed: number) =>
-  `https://i.pravatar.cc/150?img=${seed}`;
+const AVATAR = (seed: number) => `https://i.pravatar.cc/150?img=${seed}`;
 
 export const MOCK_USERS: User[] = Array.from({ length: 20 }, (_, i) => ({
   user_id: i + 1,
   username: `user${i + 1}`,
-  email: `user${i + 1}@hairsense.app`,
+  email: `user${i + 1}@ai-hairstyle-recommendation.app`,
   gender: i % 2 === 0 ? "female" : "male",
   phone: `09${String(10000000 + i * 12345).slice(0, 8)}`,
   role_id: 2,
   created_at: new Date(Date.now() - i * 86400000 * 3).toISOString(),
   is_locked: i === 7,
   avatar_url: AVATAR(i + 1),
+  fullname: `Nguyễn Văn ${i + 1}`,
+  dob: new Date(Date.now() - (20 + i) * 365.25 * 86400000).toISOString().split("T")[0],
+  address: `${100 + i * 5} Đường Lê Lợi, Quận 1, TP. Hồ Chí Minh`,
 }));
 
 // Demo accounts for each role
@@ -37,22 +39,28 @@ MOCK_USERS.push(
   {
     user_id: 100,
     username: "admin",
-    email: "admin@hairsense.app",
+    email: "admin@ai-hairstyle-recommendation.app",
     gender: "male",
     phone: "0900000001",
     role_id: 1,
     created_at: new Date().toISOString(),
     avatar_url: AVATAR(60),
+    fullname: "Quản trị viên hệ thống",
+    dob: "1995-05-15",
+    address: "123 Đường Điện Biên Phủ, Quận Bình Thạnh, TP. Hồ Chí Minh",
   },
   {
     user_id: 101,
     username: "salon",
-    email: "salon@hairsense.app",
+    email: "salon@ai-hairstyle-recommendation.app",
     gender: "female",
     phone: "0900000002",
     role_id: 3,
     created_at: new Date().toISOString(),
     avatar_url: AVATAR(45),
+    fullname: "Chủ Salon Demo",
+    dob: "1998-08-20",
+    address: "456 Đường Nguyễn Trãi, Quận 5, TP. Hồ Chí Minh",
   },
 );
 
@@ -156,13 +164,7 @@ export const MOCK_HAIR_FACE: HairFaceRule[] = (() => {
   return rules;
 })();
 
-const SALON_TAGS = [
-  "Tròn,Oval",
-  "Oval,Trái Tim",
-  "Vuông,Dài",
-  "Trái Tim,Oval",
-  "Oval,Dài,Vuông",
-];
+const SALON_TAGS = ["Tròn,Oval", "Oval,Trái Tim", "Vuông,Dài", "Trái Tim,Oval", "Oval,Dài,Vuông"];
 
 export const MOCK_SALONS: Salon[] = Array.from({ length: 20 }, (_, i) => ({
   salon_id: i + 1,

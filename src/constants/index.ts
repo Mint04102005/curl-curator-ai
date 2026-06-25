@@ -8,7 +8,7 @@ export const ROLE: Record<string, RoleId> = {
 
 export const ROLE_HOME: Record<RoleId, string> = {
   1: "/admin/approvals",
-  2: "/home",
+  2: "/user/home",
   3: "/salon/bookings",
 };
 
