@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UserRouteImport } from './routes/_user'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SalonBookingsRouteImport } from './routes/salon.bookings'
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as AdminApprovalsRouteImport } from './routes/admin.approvals'
 import { Route as UserTryOnRouteImport } from './routes/_user.try-on'
 import { Route as UserSalonsRouteImport } from './routes/_user.salons'
 import { Route as UserRecommendationRouteImport } from './routes/_user.recommendation'
@@ -29,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SalonBookingsRoute = SalonBookingsRouteImport.update({
+  id: '/salon/bookings',
+  path: '/salon/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
   id: '/auth/register',
   path: '/auth/register',
@@ -37,6 +44,11 @@ const AuthRegisterRoute = AuthRegisterRouteImport.update({
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/auth/login',
   path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminApprovalsRoute = AdminApprovalsRouteImport.update({
+  id: '/admin/approvals',
+  path: '/admin/approvals',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UserTryOnRoute = UserTryOnRouteImport.update({
@@ -77,8 +89,10 @@ export interface FileRoutesByFullPath {
   '/recommendation': typeof UserRecommendationRoute
   '/salons': typeof UserSalonsRoute
   '/try-on': typeof UserTryOnRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/salon/bookings': typeof SalonBookingsRoute
   '/booking/$id': typeof UserBookingIdRoute
 }
 export interface FileRoutesByTo {
@@ -88,8 +102,10 @@ export interface FileRoutesByTo {
   '/recommendation': typeof UserRecommendationRoute
   '/salons': typeof UserSalonsRoute
   '/try-on': typeof UserTryOnRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/salon/bookings': typeof SalonBookingsRoute
   '/booking/$id': typeof UserBookingIdRoute
 }
 export interface FileRoutesById {
@@ -101,8 +117,10 @@ export interface FileRoutesById {
   '/_user/recommendation': typeof UserRecommendationRoute
   '/_user/salons': typeof UserSalonsRoute
   '/_user/try-on': typeof UserTryOnRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
+  '/salon/bookings': typeof SalonBookingsRoute
   '/_user/booking/$id': typeof UserBookingIdRoute
 }
 export interface FileRouteTypes {
@@ -114,8 +132,10 @@ export interface FileRouteTypes {
     | '/recommendation'
     | '/salons'
     | '/try-on'
+    | '/admin/approvals'
     | '/auth/login'
     | '/auth/register'
+    | '/salon/bookings'
     | '/booking/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -125,8 +145,10 @@ export interface FileRouteTypes {
     | '/recommendation'
     | '/salons'
     | '/try-on'
+    | '/admin/approvals'
     | '/auth/login'
     | '/auth/register'
+    | '/salon/bookings'
     | '/booking/$id'
   id:
     | '__root__'
@@ -137,16 +159,20 @@ export interface FileRouteTypes {
     | '/_user/recommendation'
     | '/_user/salons'
     | '/_user/try-on'
+    | '/admin/approvals'
     | '/auth/login'
     | '/auth/register'
+    | '/salon/bookings'
     | '/_user/booking/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   UserRoute: typeof UserRouteWithChildren
+  AdminApprovalsRoute: typeof AdminApprovalsRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
+  SalonBookingsRoute: typeof SalonBookingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -165,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/salon/bookings': {
+      id: '/salon/bookings'
+      path: '/salon/bookings'
+      fullPath: '/salon/bookings'
+      preLoaderRoute: typeof SalonBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/register': {
       id: '/auth/register'
       path: '/auth/register'
@@ -177,6 +210,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/login'
       fullPath: '/auth/login'
       preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/approvals': {
+      id: '/admin/approvals'
+      path: '/admin/approvals'
+      fullPath: '/admin/approvals'
+      preLoaderRoute: typeof AdminApprovalsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_user/try-on': {
@@ -247,8 +287,10 @@ const UserRouteWithChildren = UserRoute._addFileChildren(UserRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   UserRoute: UserRouteWithChildren,
+  AdminApprovalsRoute: AdminApprovalsRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
+  SalonBookingsRoute: SalonBookingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
