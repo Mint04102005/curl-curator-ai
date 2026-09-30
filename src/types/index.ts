@@ -65,6 +65,7 @@ export interface Salon {
   rating: number;
   tag: string;
   image_url: string;
+  description?: string;
 }
 
 export interface Booking {
@@ -72,6 +73,7 @@ export interface Booking {
   user_id: number;
   salon_id: number;
   booking_date: string;
+  booking_time?: string;
   notes: string;
   status: BookingStatus;
 }
@@ -91,3 +93,5 @@ export interface RecommendationResult {
     score: number;
   }>;
 }
+
+export * from "./salon";

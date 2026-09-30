@@ -10,12 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UserRouteImport } from './routes/user'
+import { Route as SalonRouteImport } from './routes/salon'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UserTryOnRouteImport } from './routes/user.try-on'
 import { Route as UserSalonsRouteImport } from './routes/user.salons'
 import { Route as UserRecommendationRouteImport } from './routes/user.recommendation'
 import { Route as UserProfileRouteImport } from './routes/user.profile'
 import { Route as UserHomeRouteImport } from './routes/user.home'
+import { Route as SalonProfileRouteImport } from './routes/salon.profile'
 import { Route as SalonBookingsRouteImport } from './routes/salon.bookings'
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
@@ -25,6 +27,11 @@ import { Route as UserBookingIdRouteImport } from './routes/user.booking.$id'
 const UserRoute = UserRouteImport.update({
   id: '/user',
   path: '/user',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalonRoute = SalonRouteImport.update({
+  id: '/salon',
+  path: '/salon',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -57,10 +64,15 @@ const UserHomeRoute = UserHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => UserRoute,
 } as any)
+const SalonProfileRoute = SalonProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => SalonRoute,
+} as any)
 const SalonBookingsRoute = SalonBookingsRouteImport.update({
-  id: '/salon/bookings',
-  path: '/salon/bookings',
-  getParentRoute: () => rootRouteImport,
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => SalonRoute,
 } as any)
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
   id: '/auth/register',
@@ -85,11 +97,13 @@ const UserBookingIdRoute = UserBookingIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/salon': typeof SalonRouteWithChildren
   '/user': typeof UserRouteWithChildren
   '/admin/approvals': typeof AdminApprovalsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/salon/bookings': typeof SalonBookingsRoute
+  '/salon/profile': typeof SalonProfileRoute
   '/user/home': typeof UserHomeRoute
   '/user/profile': typeof UserProfileRoute
   '/user/recommendation': typeof UserRecommendationRoute
@@ -99,11 +113,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/salon': typeof SalonRouteWithChildren
   '/user': typeof UserRouteWithChildren
   '/admin/approvals': typeof AdminApprovalsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/salon/bookings': typeof SalonBookingsRoute
+  '/salon/profile': typeof SalonProfileRoute
   '/user/home': typeof UserHomeRoute
   '/user/profile': typeof UserProfileRoute
   '/user/recommendation': typeof UserRecommendationRoute
@@ -114,11 +130,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/salon': typeof SalonRouteWithChildren
   '/user': typeof UserRouteWithChildren
   '/admin/approvals': typeof AdminApprovalsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/salon/bookings': typeof SalonBookingsRoute
+  '/salon/profile': typeof SalonProfileRoute
   '/user/home': typeof UserHomeRoute
   '/user/profile': typeof UserProfileRoute
   '/user/recommendation': typeof UserRecommendationRoute
@@ -130,11 +148,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/salon'
     | '/user'
     | '/admin/approvals'
     | '/auth/login'
     | '/auth/register'
     | '/salon/bookings'
+    | '/salon/profile'
     | '/user/home'
     | '/user/profile'
     | '/user/recommendation'
@@ -144,11 +164,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/salon'
     | '/user'
     | '/admin/approvals'
     | '/auth/login'
     | '/auth/register'
     | '/salon/bookings'
+    | '/salon/profile'
     | '/user/home'
     | '/user/profile'
     | '/user/recommendation'
@@ -158,11 +180,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/salon'
     | '/user'
     | '/admin/approvals'
     | '/auth/login'
     | '/auth/register'
     | '/salon/bookings'
+    | '/salon/profile'
     | '/user/home'
     | '/user/profile'
     | '/user/recommendation'
@@ -173,11 +197,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SalonRoute: typeof SalonRouteWithChildren
   UserRoute: typeof UserRouteWithChildren
   AdminApprovalsRoute: typeof AdminApprovalsRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
-  SalonBookingsRoute: typeof SalonBookingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -187,6 +211,13 @@ declare module '@tanstack/react-router' {
       path: '/user'
       fullPath: '/user'
       preLoaderRoute: typeof UserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salon': {
+      id: '/salon'
+      path: '/salon'
+      fullPath: '/salon'
+      preLoaderRoute: typeof SalonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -231,12 +262,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserHomeRouteImport
       parentRoute: typeof UserRoute
     }
+    '/salon/profile': {
+      id: '/salon/profile'
+      path: '/profile'
+      fullPath: '/salon/profile'
+      preLoaderRoute: typeof SalonProfileRouteImport
+      parentRoute: typeof SalonRoute
+    }
     '/salon/bookings': {
       id: '/salon/bookings'
-      path: '/salon/bookings'
+      path: '/bookings'
       fullPath: '/salon/bookings'
       preLoaderRoute: typeof SalonBookingsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SalonRoute
     }
     '/auth/register': {
       id: '/auth/register'
@@ -269,6 +307,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface SalonRouteChildren {
+  SalonBookingsRoute: typeof SalonBookingsRoute
+  SalonProfileRoute: typeof SalonProfileRoute
+}
+
+const SalonRouteChildren: SalonRouteChildren = {
+  SalonBookingsRoute: SalonBookingsRoute,
+  SalonProfileRoute: SalonProfileRoute,
+}
+
+const SalonRouteWithChildren = SalonRoute._addFileChildren(SalonRouteChildren)
+
 interface UserRouteChildren {
   UserHomeRoute: typeof UserHomeRoute
   UserProfileRoute: typeof UserProfileRoute
@@ -291,11 +341,11 @@ const UserRouteWithChildren = UserRoute._addFileChildren(UserRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SalonRoute: SalonRouteWithChildren,
   UserRoute: UserRouteWithChildren,
   AdminApprovalsRoute: AdminApprovalsRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
-  SalonBookingsRoute: SalonBookingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
