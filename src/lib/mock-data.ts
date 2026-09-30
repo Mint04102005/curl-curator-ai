@@ -193,7 +193,11 @@ export const MOCK_SALONS: Salon[] = Array.from({ length: 20 }, (_, i) => ({
   ][i]!,
   address: `${100 + i * 3} Nguyễn Văn Linh, Q.${(i % 12) + 1}, TP.HCM`,
   rating: Math.round((3.8 + ((i * 13) % 12) / 10) * 10) / 10,
-  tag: SALON_TAGS[i % SALON_TAGS.length]!,
+  tag: i === 0 ? "Tròn,Oval,Trái tim" : SALON_TAGS[i % SALON_TAGS.length]!,
+  description:
+    i === 0
+      ? "Chuyên tư vấn định hình phong cách tóc chuẩn theo dáng mặt với kỹ thuật cắt Layer bay, uốn phồng chân tóc và nhuộm xu hướng cá nhân hóa. Đội ngũ Master Stylist trên 8 năm kinh nghiệm."
+      : "Không gian làm đẹp cao cấp, chuyên sâu tạo kiểu tóc hiện đại và phục hồi tóc chuyên sâu.",
   image_url: SALON_IMG(
     [
       "photo-1521590832167-7bcbfaa6381f",
@@ -205,14 +209,142 @@ export const MOCK_SALONS: Salon[] = Array.from({ length: 20 }, (_, i) => ({
   ),
 }));
 
-export const MOCK_BOOKINGS: Booking[] = Array.from({ length: 30 }, (_, i) => ({
-  booking_id: i + 1,
-  user_id: (i % 20) + 1,
-  salon_id: (i % 20) + 1,
-  booking_date: new Date(Date.now() + (i - 10) * 86400000).toISOString(),
-  notes: ["Cắt + gội", "Uốn nhẹ", "Nhuộm nâu trà sữa", "Cắt nam undercut", ""][i % 5]!,
-  status: (["P", "C", "D", "X", "P"] as const)[i % 5]!,
-}));
+// Format date helper (YYYY-MM-DD)
+const offsetDate = (days: number): string => {
+  const d = new Date(Date.now() + days * 86400000);
+  return d.toISOString().split("T")[0]!;
+};
+
+export const MOCK_BOOKINGS: Booking[] = [
+  // Rich mock bookings for Salon 1 (Maison Hair Studio, Owner: user 101)
+  {
+    booking_id: 1001,
+    user_id: 1, // Nguyễn Văn 1 (female)
+    salon_id: 1,
+    booking_date: offsetDate(0), // Today
+    booking_time: "09:00",
+    notes: "Cắt tóc Layer Hàn Quốc + Uốn cụp nhẹ đuôi tóc",
+    status: "P",
+  },
+  {
+    booking_id: 1002,
+    user_id: 2, // Nguyễn Văn 2 (male)
+    salon_id: 1,
+    booking_date: offsetDate(0), // Today
+    booking_time: "11:00",
+    notes: "Cắt Side Part 7/3 vuốt sáp + cạo viền sắc nét",
+    status: "C",
+  },
+  {
+    booking_id: 1003,
+    user_id: 3, // Nguyễn Văn 3 (female)
+    salon_id: 1,
+    booking_date: offsetDate(0), // Today
+    booking_time: "16:30",
+    notes: "Nhuộm highlight nâu trà sữa + hấp dầu phục hồi",
+    status: "C",
+  },
+  {
+    booking_id: 1004,
+    user_id: 4, // Nguyễn Văn 4 (male)
+    salon_id: 1,
+    booking_date: offsetDate(1), // Tomorrow
+    booking_time: "10:00",
+    notes: "Tư vấn kiểu tóc hợp mặt vuông + Uốn textured crop",
+    status: "P",
+  },
+  {
+    booking_id: 1005,
+    user_id: 5, // Nguyễn Văn 5 (female)
+    salon_id: 1,
+    booking_date: offsetDate(1), // Tomorrow
+    booking_time: "14:30",
+    notes: "Cắt ngắn Pixie cá tính + Nhuộm nâu lạnh",
+    status: "P",
+  },
+  {
+    booking_id: 1006,
+    user_id: 6, // Nguyễn Văn 6 (male)
+    salon_id: 1,
+    booking_date: offsetDate(1), // Tomorrow
+    booking_time: "17:00",
+    notes: "Cắt tạo kiểu Two Block Hàn Quốc",
+    status: "C",
+  },
+  {
+    booking_id: 1007,
+    user_id: 7, // Nguyễn Văn 7 (female)
+    salon_id: 1,
+    booking_date: offsetDate(2), // In 2 days
+    booking_time: "09:30",
+    notes: "Uốn sóng lơi nhẹ nhàng + Cắt mái bay",
+    status: "P",
+  },
+  {
+    booking_id: 1008,
+    user_id: 8, // Nguyễn Văn 8 (male)
+    salon_id: 1,
+    booking_date: offsetDate(3), // In 3 days
+    booking_time: "15:00",
+    notes: "Cắt Undercut hiện đại + Gội massage",
+    status: "C",
+  },
+  {
+    booking_id: 1009,
+    user_id: 9, // Nguyễn Văn 9 (female)
+    salon_id: 1,
+    booking_date: offsetDate(-1), // Yesterday
+    booking_time: "10:30",
+    notes: "Cắt Bob ngang vai + Phục hồi Collagen",
+    status: "D",
+  },
+  {
+    booking_id: 1010,
+    user_id: 10, // Nguyễn Văn 10 (male)
+    salon_id: 1,
+    booking_date: offsetDate(-2), // 2 days ago
+    booking_time: "14:00",
+    notes: "Cắt Mullet Layer cá tính",
+    status: "D",
+  },
+  {
+    booking_id: 1011,
+    user_id: 11, // Nguyễn Văn 11 (female)
+    salon_id: 1,
+    booking_date: offsetDate(-3), // 3 days ago
+    booking_time: "18:00",
+    notes: "Gội dưỡng sinh thảo dược + Tạo kiểu dự tiệc",
+    status: "D",
+  },
+  {
+    booking_id: 1012,
+    user_id: 12, // Nguyễn Văn 12 (male)
+    salon_id: 1,
+    booking_date: offsetDate(-4), // 4 days ago
+    booking_time: "09:00",
+    notes: "Khách bận việc đột xuất nên xin hủy lịch",
+    status: "X",
+  },
+  {
+    booking_id: 1013,
+    user_id: 13, // Nguyễn Văn 13 (female)
+    salon_id: 1,
+    booking_date: offsetDate(-5), // 5 days ago
+    booking_time: "15:30",
+    notes: "Hủy do đổi kế hoạch công tác",
+    status: "X",
+  },
+  // Bookings for other salons to maintain Phase 1 compatibility
+  ...Array.from({ length: 20 }, (_, i) => ({
+    booking_id: 2000 + i + 1,
+    user_id: (i % 20) + 1,
+    salon_id: ((i + 1) % 19) + 2, // salons 2 to 20
+    booking_date: offsetDate(i - 10),
+    booking_time: `${String(9 + (i % 9)).padStart(2, "0")}:00`,
+    notes: ["Cắt + gội", "Uốn nhẹ", "Nhuộm nâu trà sữa", "Cắt nam undercut", ""][i % 5]!,
+    status: (["P", "C", "D", "X", "P"] as const)[i % 5]!,
+  })),
+];
 
 export const MOCK_TRY_ON_HISTORY: TryOnHistory[] = Array.from({ length: 20 }, (_, i) => ({
   history_id: i + 1,
@@ -228,3 +360,24 @@ export const MOCK_APPROVALS: PendingApproval[] = Array.from({ length: 10 }, (_, 
   owner_id: i + 1,
   status: (["P", "P", "A", "P", "R", "P", "A", "P", "P", "R"] as const)[i]!,
 }));
+
+// LocalStorage Persistence Helpers
+export function getStorageData<T>(key: string, defaultValue: T): T {
+  if (typeof window === "undefined") return defaultValue;
+  try {
+    const raw = window.localStorage.getItem(key);
+    if (!raw) return defaultValue;
+    return JSON.parse(raw) as T;
+  } catch {
+    return defaultValue;
+  }
+}
+
+export function setStorageData<T>(key: string, value: T): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    console.error("Failed to save to localStorage", err);
+  }
+}

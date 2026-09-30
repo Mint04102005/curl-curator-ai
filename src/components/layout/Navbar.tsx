@@ -16,9 +16,8 @@ import { useAuthStore } from "@/stores/auth.store";
 
 const NAV = [
   { to: "/user/home", label: "Trang chủ" },
-  { to: "/user/recommendation", label: "AI Gợi ý" },
-  { to: "/user/try-on", label: "Thử tóc" },
-  { to: "/user/salons", label: "Salon" },
+  { to: "/user/try-on", label: "AI Studio (Gợi ý & Thử tóc)" },
+  { to: "/user/salons", label: "Tìm Salon" },
 ] as const;
 
 export function Navbar() {
